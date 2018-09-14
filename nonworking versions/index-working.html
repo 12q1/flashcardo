@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<head>
+  <title> Flash Cardo </title>
+  <link href="style/style.css" rel="stylesheet" />
+</head>
+<body>
+
+<div>
+  <img id="plusSign" src="images/plus.png" alt="plus symbol">
+</div>
+
+<div id = "up">
+</div>
+
+<div id="mainCard">
+ <div id="flipInsideCard">
+   <div id="flipFrontCard">
+     <p id="question">textInput1</p>
+   </div>
+   <div id="flipBackCard">
+     <p id="answer">TextInput2</p>
+   </div>
+ </div>
+</div>
+<div>
+  <button id="butt" onclick="Next();">Next!</button>
+  <button id="butt2" onclick="Prev();">Previous</button>
+  </div>
+
+<div>
+    <img id="minusSign" src="images/minus.png" alt="plus symbol">
+</div>
+
+<div id = "down">
+</div>
+
+</body>
+<script>
+  let array1 =["Method", "Object", "Literal", "Function", "Event Handler", "prompt" ];
+  let array2 =["A function assigned to an object", "A construct with properties that are variables or other objects", "An absolute value not assigned to a variable", "A user-defined or built-in set of statements that perform a task.", "Attributes of HTML tags embedded in documents.", "A dialog that accepts user input" ];
+
+//Code that controls the minus button starts here
+  let minusButton = document.getElementById('minusSign');
+  minusButton.onclick = function removeCard(){
+    console.log("minus button has been pressed");
+    getCardId()
+    console.log(`Card ID found, index is ${cardID}`)
+    array1.splice(cardID, 1);
+    array2.splice(cardID, 1);
+    console.log(`Index ${cardID} removed from both arrays`)
+
+  }
+
+//this code tries to find the index number of the mainCard by comparing the string of the innerText and the array
+
+let cardTextGlobal
+  function getCardText(){
+    let cardText = document.getElementById("question").innerText;
+    cardTextGlobal = cardText
+    return cardText;
+
+  }
+
+let cardID = 0
+    function getCardId(){
+        cardID = array1.findIndex(getCardText)
+        console.log(cardID);
+
+  }
+//Code that controls the minus button ends here
+
+// this is where Charafs code starts
+let Current = 0;
+
+document.getElementById("question").innerHTML = array1[Current];
+
+function Prev(){
+    if(Current == 0){
+        Current = array1.length - 1;}
+    else{
+        Current--;}
+
+    document.getElementById("question").innerHTML = array1[Current];
+}
+
+function Next(){
+    if(Current == array1.length - 1){
+        Current = 0}
+    else{
+        Current++;}
+
+    document.getElementById("question").innerHTML = array1[Current];
+}
+// this is where charaf code ends
+
+</script>
